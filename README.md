@@ -1,1 +1,1 @@
-# PMS-UI
+# react-starter-kit

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, TextField, RaisedButton} from 'material-ui'
 
-let Login = React.createClass({ 
+let Login = React.createClass({
 
   getInitialState() {
     return {
@@ -23,9 +23,6 @@ let Login = React.createClass({
   },
 
   login() {
-    //UserService.login(this.state.username, this.state.password).then(=> {
-    //do something
-    //});
     console.log(this.state)
   },
 
@@ -45,4 +42,4 @@ let Login = React.createClass({
   }
 });
 
-export default Login; 
+export default Login;

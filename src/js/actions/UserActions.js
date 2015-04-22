@@ -1,6 +1,5 @@
 import Dispatcher from '../app/AppDispatcher.js'
 
-
 let UserActions = {
   login() {
 

@@ -3,8 +3,10 @@ require('../../css/main.less');
 import React from 'react';
 import Router from 'react-router';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
+import TapPlugin from 'react-tap-event-plugin'
 
 import LoginHandler from '../components/Login.js';
+
 
 let App = React.createClass({
   render() {
@@ -24,6 +26,9 @@ let routes = (
     <Route name="login" path="/login" handler={LoginHandler}/>
   </Route>
 );
+
+//this needs to go away as soon as MUI moves to 1.0
+TapPlugin()
 
 Router.run(routes, function (Handler) {
   React.render(<Handler/>, document.body);

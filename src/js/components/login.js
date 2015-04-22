@@ -3,52 +3,56 @@ import UserActions from '../actions/UserActions.js';
 import GeneralStore from 'general-store'
 import UserStore from '../stores/UserStore.js'
 
-import {Paper, TextField, RaisedButton} from 'material-ui'
+import {Paper, TextField, RaisedButton, DatePicker} from 'material-ui'
+
+let depsFromStores = {
+  user: UserStore
+}
 
 let Login = React.createClass({
 
   mixins: [
-    GeneralStore.StoreDependencyMixin({
-      user: UserStore
-    })
+    GeneralStore.StoreDependencyMixin(depsFromStores)
   ],
 
   getInitialState() {
     return {
-      username: '',
-      password: ''
+      checkIn: '',
+      checkOut: ''
     }
   },
 
-  updatePassword(e) {
+  updateCheckOut(event, date) {
     this.setState({
-      password: e.currentTarget.value
+      checkOut: date
     })
   },
 
-  updateUsername(e) {
+  updateCheckIn(event, date) {
     this.setState({
-      username: e.currentTarget.value
+      checkIn: date
     })
   },
 
-  login() {
-    UserActions.login();
-    debugger
+  checkAvailability() {
     console.log(this.state)
+
+    let {checkIn, checkOut} = this.state
+
+    if(checkIn.length && checkOut.length){
+      UserActions.login();
+    }
   },
 
   render() {
     return(
       <Paper zDepth={1} className="login">
-        <h1>LOGIN</h1>
-        <strong>{this.state.user}</strong>
-        <TextField
-          floatingLabelText="Username" className="login-input" onChange={this.updateUsername}/>
-        <TextField
-          floatingLabelText="Password" className="login-input" onChange={this.updatePassword} />
+        <h2>Check Availability</h2>
 
-        <RaisedButton label="LOGIN" primary={true} className="login-button" onClick={this.login}/>
+        <DatePicker onChange={this.updateCheckIn} hintText="Check In Date" className="availability-input" />
+        <DatePicker onChange={this.updateCheckOut} hintText="Check Out Date"  className="availability-input" />
+
+        <RaisedButton label="GO" primary={true} className="availability-button" onClick={this.checkAvailability}/>
 
       </Paper>
     );
